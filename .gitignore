@@ -28,6 +28,8 @@
 
 # misc
 /.sass-cache
+/.parcel-cache
+/.parcel-cache/*
 /connect.lock
 /coverage
 /libpeerconnection.log
