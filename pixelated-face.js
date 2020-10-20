@@ -18,9 +18,22 @@ async function populateVideo() {
 
    webcam.srcObject = stream;
 
-   webcam.play();
+   await webcam.play(); //without await video width and height are == 0;
 
    console.log(stream);
+
+   const { videoWidth, videoHeight } = webcam;
+
+   console.log(videoWidth, videoHeight);
+
+   videoCanvas.width = videoWidth;
+   videoCanvas.height = videoHeight;
+
+
+   faceCanvas.width = videoWidth;
+   faceCanvas.height = videoHeight;
+
+
 }
 
 
