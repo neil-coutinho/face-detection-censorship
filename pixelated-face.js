@@ -1,14 +1,14 @@
-const webcam     = document.querySelector(".webcam");
+const webcam = document.querySelector(".webcam");
 
-const videoCanvas     = document.querySelector(".video");
+const videoCanvas = document.querySelector(".video");
 const vctx = videoCanvas.getContext("2d");
 
 const faceCanvas = document.querySelector(".face");
 const fctx = faceCanvas.getContext("2d");
 
-const faceDetector = new FaceDetector();
+const fd = new window.FaceDetector();
 
-console.log({webcam, videoCanvas, vctx, faceCanvas, fctx, faceDetector});
+console.log({webcam, videoCanvas, vctx, faceCanvas, fctx, fd});
 
 
 async function populateVideo() {
@@ -36,5 +36,14 @@ async function populateVideo() {
 
 }
 
+async function detect() {
+    
+    const faces = await fd.detect(webcam);
+    const profilePhoto = document.getElementById("profilePhoto");
+    const profileFace = await fd.detect(profilePhoto);
+    console.log({faces, profileFace})
+}
 
-console.log(populateVideo());
+populateVideo().then(detect)
+
+
