@@ -8,7 +8,7 @@ const fctx = faceCanvas.getContext("2d");
 
 const profilePhoto = document.getElementById("profilePhoto");
 
-const fd = new window.FaceDetector();
+const fd = new FaceDetector({ fastMode: true });
 
 if (window.FaceDetector == undefined) {
     console.error('Face Detection not supported');
@@ -20,7 +20,7 @@ console.log({webcam, videoCanvas, vctx, faceCanvas, fctx, fd});
 
 async function populateVideo() {
    let stream =  await navigator.mediaDevices.getUserMedia({
-       video: { width: 1280, height: 720}
+       video: { width: 640, height: 480}
    });
 
    webcam.srcObject = stream;
@@ -50,7 +50,7 @@ async function detect() {
     const profileFace = await fd.detect(profilePhoto);
     console.log({faces, profileFace});
 
-   //requestAnimationFrame(detect);
+   requestAnimationFrame(detect);
 }
 
 populateVideo().then(detect)
