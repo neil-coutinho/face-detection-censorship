@@ -3,8 +3,13 @@ const webcam = document.querySelector(".webcam");
 const videoCanvas = document.querySelector(".video");
 const vctx = videoCanvas.getContext("2d");
 
+
+
+
 const faceCanvas = document.querySelector(".face");
 const fctx = faceCanvas.getContext("2d");
+
+
 
 const profilePhoto = document.getElementById("profilePhoto");
 
@@ -47,12 +52,26 @@ async function detect() {
     
     const faces = await fd.detect(webcam);
    
-    const profileFace = await fd.detect(profilePhoto);
-    console.log({faces, profileFace});
+    // const profileFace = await fd.detect(profilePhoto);
+    // console.log({faces, profileFace});
+
+    faces.forEach(drawFace);
+    //profileFace.forEach(drawFace)
 
    requestAnimationFrame(detect);
 }
 
+
+function drawFace(face) {
+    console.log(face);
+    const {boundingBox : {width, height, top, left}} = face;
+
+    console.log({width, height, top, left})
+
+    vctx.strokeStyle = '#ff9900';
+    vctx.lineWidth = 4;
+    vctx.strokeRect(left, top, width, height);
+}
 populateVideo().then(detect)
 
 
