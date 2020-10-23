@@ -67,9 +67,9 @@ function drawFace(face) {
     const {boundingBox : {width, height, top, left}} = face;
 
     console.log({width, height, top, left})
-
+    vctx.clearRect(0,0,videoCanvas.width, videoCanvas.height )
     vctx.strokeStyle = '#ff9900';
-    vctx.lineWidth = 4;
+    vctx.lineWidth = 1;
     vctx.strokeRect(left, top, width, height);
 }
 populateVideo().then(detect)
